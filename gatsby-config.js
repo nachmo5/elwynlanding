@@ -1,7 +1,8 @@
+const siteUrl = process.env.URL || `https://vigilant-benz-16fd71.netlify.app`;
+
 module.exports = {
   siteMetadata: {
     title: 'Elwyn',
-    description: 'Elwyn',
   },
   plugins: [
     'gatsby-plugin-styled-components',
@@ -13,7 +14,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
