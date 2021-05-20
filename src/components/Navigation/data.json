@@ -1,0 +1,26 @@
+{
+  "links": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Solutions",
+      "url": "/solutions",
+      "children": [
+        {
+          "name": "Sagemaker Kit",
+          "url": "/sagemakerkit"
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "url": "/blog"
+    },
+    {
+      "name": "About us",
+      "url": "/about"
+    }
+  ]
+}
