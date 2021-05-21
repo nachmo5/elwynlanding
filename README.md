@@ -15,7 +15,6 @@
 
 
   **Production mode**
-
     Run the command
 
     ```shell
