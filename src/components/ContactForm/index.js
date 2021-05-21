@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../Navigation/style';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import emailjs from 'emailjs-com';
+import Popover from './Popover';
+import useSiteMetadata from '../../hooks/useSiteMetadata';
 
 export const Form = styled.div`
   width: 540px;
@@ -56,24 +59,103 @@ export const StartButton = styled(Button)`
   `}
 `;
 
+const isValidEmail = (email) =>
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+
 const ContactForm = (props) => {
   const { withLabels = false } = props;
-  const submit = () => {
-    navigate('/congrats');
+  const {
+    emailjs: { userId, serviceId, templateId },
+  } = useSiteMetadata();
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [error, setError] = useState(null);
+
+  const isValid = () => {
+    if (!formData.name) {
+      setError('name');
+      return false;
+    }
+
+    if (!formData.email || !isValidEmail(formData.email)) {
+      setError('email');
+      return false;
+    }
+    if (!formData.message) {
+      setError('message');
+      return false;
+    }
+    return true;
   };
+  const submit = () => {
+    const valid = isValid();
+    if (!valid) {
+      return setTimeout(() => {
+        setError(null);
+      }, 3000);
+    }
+    const emailData = {
+      from_name: formData.name,
+      message: formData.message,
+      reply_to: formData.email,
+    };
+
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
+
+    emailjs
+      .send(serviceId, templateId, emailData, userId) //
+      .finally(() => navigate('/congrats'));
+  };
+
+  const onChange = (name) => (e) => setFormData((f) => ({ ...f, [name]: e.target.value }));
   return (
     <Form>
+      {/* =================================================== */}
+      {/* ======================= NAME ===================== */}
+      {/* =================================================== */}
       {withLabels && <FormLabel>Your name</FormLabel>}
       <FormInput>
-        <input type="text" placeholder="Your name" />
+        <input
+          onChange={onChange('name')}
+          value={formData['name']}
+          type="text"
+          placeholder="Your name"
+        />
       </FormInput>
+      {error === 'name' && <Popover field="name" />}
+      {/* =================================================== */}
+      {/* ======================= EMAIL ===================== */}
+      {/* =================================================== */}
       {withLabels && <FormLabel>Your email</FormLabel>}
       <FormInput>
-        <input type="text" placeholder="Your email" />
+        <input
+          onChange={onChange('email')}
+          value={formData['email']}
+          type="text"
+          placeholder="Your email"
+        />
       </FormInput>
+      {error === 'email' && <Popover field="email" />}
+      {/* =================================================== */}
+      {/* ======================= MESSAGE ===================== */}
+      {/* =================================================== */}
       {withLabels && <FormLabel>Your message</FormLabel>}
+      {error === 'message' && <Popover place="top" field="message" />}
       <FormInput>
-        <textarea rows="6" placeholder="Write your message here" />
+        <textarea
+          onChange={onChange('message')}
+          value={formData['message']}
+          rows="6"
+          placeholder="Write your message here"
+        />
       </FormInput>
       <StartButton onClick={submit} style={{ width: '100%' }}>
         Send message

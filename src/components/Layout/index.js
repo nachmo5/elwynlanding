@@ -4,21 +4,16 @@ import './style.css';
 import { ThemeProvider } from 'styled-components';
 import 'animate.css/animate.min.css';
 import { Helmet } from 'react-helmet';
+import useSiteMetadata from '../../hooks/useSiteMetadata';
 
-const theme = {
-  color: {
-    primary: 'rgb(52, 169, 161)',
-    darker_primary: 'rgb(11, 111, 104)',
-    grey: 'rgba(25, 25, 27, 0.75)',
-    black: 'rgb(25, 25, 27)',
-  },
-};
 const Layout = ({ children, footerColor = 'black', fixedFooter = false }) => {
+  const metadata = useSiteMetadata();
   const footerStyle = fixedFooter ? { position: 'absolute', bottom: 0 } : {};
+  const theme = metadata.theme;
   return (
     <ThemeProvider theme={theme}>
       <Helmet>
-        <title>Turn data into decisions</title>
+        <title>{metadata.title}</title>
       </Helmet>
       <Navigation />
       <div style={{ width: '100%', height: '100%', overflowX: 'hidden' }}>{children}</div>

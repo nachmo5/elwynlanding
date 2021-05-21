@@ -1,8 +1,19 @@
-const siteUrl = process.env.URL || `https://vigilant-benz-16fd71.netlify.app`;
-
 module.exports = {
   siteMetadata: {
-    title: 'Elwyn',
+    title: 'Turn data into decisions',
+    emailjs: {
+      userId: '',
+      serviceId: '',
+      templateId: '',
+    },
+    theme: {
+      color: {
+        primary: 'rgb(52, 169, 161)',
+        darker_primary: 'rgb(11, 111, 104)',
+        grey: 'rgba(25, 25, 27, 0.75)',
+        black: 'rgb(25, 25, 27)',
+      },
+    },
   },
   plugins: [
     'gatsby-plugin-styled-components',
