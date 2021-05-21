@@ -26,6 +26,12 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         icon: 'src/images/icon.png',
@@ -40,6 +46,14 @@ module.exports = {
         path: './src/images/',
       },
       __key: 'images',
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blogposts`,
+        path: `./src/blogposts`,
+        __key: 'blogposts',
+      },
     },
   ],
 };

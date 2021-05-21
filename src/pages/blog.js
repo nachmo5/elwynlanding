@@ -3,6 +3,8 @@ import Layout from '../components/Layout';
 import { Header } from '../styles/about';
 import { HugeText, NormalText } from '../styles/sectionone';
 import { StaticImage } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
+import useBlogPosts from '../hooks/useBlogPosts';
 import {
   Article,
   ArticleDate,
@@ -14,7 +16,9 @@ import {
   Box,
 } from '../styles/blog';
 
-const blog = () => {
+const Blog = () => {
+  const posts = useBlogPosts();
+
   return (
     <Layout footerColor="white">
       <Header style={{ flexDirection: 'column', justifyContent: 'center' }}>
@@ -25,47 +29,27 @@ const blog = () => {
       </Header>
       <Box>
         <Articles>
-          <Article>
-            <ArticleImage>
-              <StaticImage
-                src="../images/business_analytics.svg"
-                imgStyle={{ objectFit: 'contain' }}
-                alt=""
-              />
-            </ArticleImage>
-            <ArticleDate>February 22nd, 2021</ArticleDate>
-            <ArticleTitle>Lorem ipsum dolor sit amet</ArticleTitle>
-            <ArticleDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis dui vel tellus
-              convallis rutrum. Aliquam nulla augue, sagittis in bibendum in, cursus sit amet felis.
-              Ut id risus risus. Phasellus commodo aliquet tortor, nec mollis velit venenatis et.
-              Pellentesque aliquet pretium consequat.
-            </ArticleDescription>
-            <ArticleLink>Continue Reading</ArticleLink>
-          </Article>
-
-          <Article>
-            <ArticleImage>
-              <StaticImage
-                src="../images/business_analytics.svg"
-                imgStyle={{ objectFit: 'contain' }}
-                alt=""
-              />
-            </ArticleImage>
-            <ArticleDate>February 22nd, 2021</ArticleDate>
-            <ArticleTitle>Lorem ipsum dolor sit amet</ArticleTitle>
-            <ArticleDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis dui vel tellus
-              convallis rutrum. Aliquam nulla augue, sagittis in bibendum in, cursus sit amet felis.
-              Ut id risus risus. Phasellus commodo aliquet tortor, nec mollis velit venenatis et.
-              Pellentesque aliquet pretium consequat.
-            </ArticleDescription>
-            <ArticleLink>Continue Reading</ArticleLink>
-          </Article>
+          {(posts || []).map((post) => (
+            <Link to={post.slug} key={post.id}>
+              <Article>
+                <ArticleImage>
+                  <StaticImage
+                    src="../images/business_analytics.svg"
+                    imgStyle={{ objectFit: 'contain' }}
+                    alt=""
+                  />
+                </ArticleImage>
+                <ArticleDate>{post.date}</ArticleDate>
+                <ArticleTitle>{post.title}</ArticleTitle>
+                <ArticleDescription>{post.description}</ArticleDescription>
+                <ArticleLink>Continue Reading</ArticleLink>
+              </Article>
+            </Link>
+          ))}
         </Articles>
       </Box>
     </Layout>
   );
 };
 
-export default blog;
+export default Blog;
