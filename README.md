@@ -6,7 +6,6 @@
     Run the command
 
     ```shell
-    # create a new Gatsby site using the minimal starter
     npm run develop
     ```
 
@@ -20,7 +19,6 @@
     Run the command
 
     ```shell
-    # create a new Gatsby site using the minimal starter
     npm run build
     ```
     
