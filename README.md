@@ -14,13 +14,13 @@
     Your site is now running at http://localhost:8000!
 
 
-  **Production mode**
+3.  **Production mode**
+
     Run the command
 
     ```shell
-    npm run build
+    npm run develop
     ```
-    
   **Change blogs**
 
  Add a new mdx file to src/blogposts and specify the metadata inside the file. (title, description, author, date)
