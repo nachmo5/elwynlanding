@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../components/Navigation/style';
+import { Button } from '../components/Navigation/style';
 
 export const SectionOne = styled.div`
   display: flex;

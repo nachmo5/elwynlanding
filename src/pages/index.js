@@ -13,7 +13,7 @@ import {
   StartButton,
   Img,
   BgImg,
-} from '../components/Home/SectionOne';
+} from '../styles/sectionone';
 import {
   SectionTwo,
   SectionTwoMain,
@@ -26,15 +26,9 @@ import {
   CardDescription,
   Icon,
   BigText,
-} from '../components/Home/SectionTwo';
-import { SectionThree, TextBoxThree } from '../components/Home/SectionThree';
-import {
-  SectionFour,
-  SectionFourBody,
-  Form,
-  FormInput,
-  SectionFourHeader,
-} from '../components/Home/SectionFour';
+} from '../styles/sectiontwo';
+import { SectionThree, TextBoxThree } from '../styles/sectionthree';
+import { SectionFour, SectionFourBody, SectionFourHeader } from '../styles/sectionfour';
 
 // markup
 const IndexPage = (props) => {
