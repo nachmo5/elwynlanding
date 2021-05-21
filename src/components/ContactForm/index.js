@@ -112,7 +112,8 @@ const ContactForm = (props) => {
 
     emailjs
       .send(serviceId, templateId, emailData, userId) //
-      .finally(() => navigate('/congrats'));
+      .then(() => navigate('/congrats')) //
+      .catch(() => navigate('/404'));
   };
 
   const onChange = (name) => (e) => setFormData((f) => ({ ...f, [name]: e.target.value }));
