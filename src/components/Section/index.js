@@ -7,9 +7,11 @@ export const Main = styled.div`
   display: flex;
   min-height: 600px;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   ${({ fullScreen }) => (fullScreen ? `padding: 18vh 10vw;` : `padding: 15vh 10vw;`)}
-  ${({ isImageLeft }) => isImageLeft && `flex-direction: row-reverse;`}
 
+  ${({ isImageLeft }) => isImageLeft && `flex-direction: row-reverse;`}
   ${({ isImageLeft }) =>
     !isImageLeft &&
     `@media (max-width: 992px) {
