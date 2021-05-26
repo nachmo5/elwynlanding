@@ -116,7 +116,10 @@ const ContactForm = (props) => {
       .catch(() => navigate('/404'));
   };
 
-  const onChange = (name) => (e) => setFormData((f) => ({ ...f, [name]: e.target.value }));
+  const onChange = (name) => (e) => {
+    const value = e.target.value;
+    setFormData((f) => ({ ...f, [name]: value }));
+  };
   return (
     <Form>
       {/* =================================================== */}
